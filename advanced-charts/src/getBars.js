@@ -70,7 +70,8 @@ export const getBars = async (
         const close = Number(data.Trade.close.toFixed(18));
         let high = Number(data.Trade.high.toFixed(18));
         let low = Number(data.Trade.low.toFixed(18));
-
+        const resdate = new Date(data.Block.Time);
+        console.log("resdate ",resdate )
         // Adjust extreme high/low values - there might be a better way but removing these allows the chart to render correctly
         const { adjustedHigh, adjustedLow } = adjustExtremeValues(
           high,
@@ -81,7 +82,8 @@ export const getBars = async (
         ); // 1.5 is an example threshold
 
         bars[i] = {
-          time: time.getTime(),
+          // time: time.getTime(),
+          time: resdate,
           open: open,
           high: adjustedHigh,
           low: adjustedLow,
@@ -92,6 +94,7 @@ export const getBars = async (
         // Set default empty bar - if the token is new and doesn't have enough bars to fill the periodParams.countBack bars
         bars[i] = {
           time: time.getTime(),
+         
           open: 0,
           high: 0,
           low: 0,
@@ -108,7 +111,7 @@ export const getBars = async (
 
     console.log("bars", bars);
     console.log("barsLength", bars.length);
-    console.log("firstBarTime:", bars[0].time);
+    console.log("firstBarTime here:", bars[0].time);
     console.log("firstBarTime:", new Date(bars[0].time).toISOString());
     console.log("lastBarTime:", bars[bars.length - 1].time);
     console.log(
