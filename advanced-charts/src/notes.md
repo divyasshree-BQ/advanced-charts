@@ -10,3 +10,4 @@ https://github.com/ayoub-org/tradingview-library/tree/main
 
 https://github.com/tradingview/charting-library-tutorial/blob/master/src/datafeed.js
 
+https://github.com/tradingview/charting_library/wiki/Frequently-Asked-Questions

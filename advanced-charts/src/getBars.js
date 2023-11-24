@@ -20,9 +20,7 @@ export const getBars = async (
   onErrorCallback
 ) => {
   try {
-    resolution="1"
-    console.log("resolution:", resolution);
-    console.log("periodParams:", periodParams);
+  
     const fromTime = new Date(periodParams.from * 1000).toISOString();
     const toTime = new Date(periodParams.to * 1000).toISOString();
     console.log("fromTime:", fromTime);

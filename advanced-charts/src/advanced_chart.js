@@ -12,7 +12,7 @@ const TVChartContainer = () => {
       datafeed: Datafeed,
       container: chartContainerRef.current,
       library_path: "/charting_library/",
-      interval:"1",
+      interval:"1D",
       resolution:"1",
       locale: "en",
       disabled_features: [
@@ -46,7 +46,7 @@ const TVChartContainer = () => {
     };
   }, []);
 
-  return <div ref={chartContainerRef} style={{ height: '900px', backgroundColor: 'black' }}/>;
+  return <div ref={chartContainerRef} style={{ height: '800px', backgroundColor: 'black' }}/>;
 };
 
 export default TVChartContainer;

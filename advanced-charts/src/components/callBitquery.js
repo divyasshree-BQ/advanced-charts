@@ -15,7 +15,7 @@ export const TOKEN_DETAILS = `
       limit: {count: 200}
     ) {
       Block {
-        Time(interval: {in: minutes})
+        Time(interval: {in: days})
       }
       volume: sum(of: Trade_Amount)
       Trade {
