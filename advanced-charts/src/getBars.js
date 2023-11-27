@@ -25,7 +25,7 @@ export const getBars = async (
     const toTime = new Date(periodParams.to * 1000).toISOString();
     console.log("fromTime:", fromTime);
     console.log("toTime:", toTime);
-    const requiredBars = periodParams.countBack + 1;
+    const requiredBars = 302
     console.log("requiredBars", requiredBars);
 
     const bars = new Array(periodParams.countBack + 1);
@@ -36,20 +36,10 @@ export const getBars = async (
 
     // Fetch data based on periodParams
     const response = await axios.post(
-      Bitquery.endpoint2,
+      Bitquery.endpoint,
       {
         query: Bitquery.TOKEN_DETAILS, // query for daily candles
-        variables: {
-          network: "eth",
-          limit: periodParams.countBack + 1, // Consider adjusting this limit based on periodParams.countBack
-          interval: "days",
-          candle: "1",
-          baseToken: "0x6982508145454ce325ddbe47a25d4ec3d2311933",
-          quoteToken: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
-          dex: "uniswap_v2",
-          from: fromTime, // TradingView period params
-          to: toTime,
-        },
+      
         mode: "cors",
       },
       {
@@ -61,7 +51,7 @@ export const getBars = async (
     );
 
     console.log("response ", response);
-    for (let i = periodParams.countBack; i > -1; i--) {
+    for (let i = 302; i > -1; i--) {
       const data = response.data.data.EVM.DEXTradeByTokens[i];
 
       if (data) {
@@ -71,7 +61,7 @@ export const getBars = async (
         let high = Number(data.Trade.high.toFixed(18));
         let low = Number(data.Trade.low.toFixed(18));
         const resdate = new Date(data.Block.Time);
-        console.log("resdate ",resdate )
+     
         // Adjust extreme high/low values - there might be a better way but removing these allows the chart to render correctly
         const { adjustedHigh, adjustedLow } = adjustExtremeValues(
           high,
@@ -106,20 +96,7 @@ export const getBars = async (
       time.setUTCDate(time.getUTCDate() - 1);
     }
 
-    // bars.sort((a, b) => new Date(a.time) - new Date(b.time)); // Sort data in ascending order
-    // bars.sort((a, b) => new Date(b.time) - new Date(a.time)); // decending
 
-    console.log("bars", bars);
-    console.log("barsLength", bars.length);
-    console.log("firstBarTime here:", bars[0].time);
-    console.log("firstBarTime:", new Date(bars[0].time).toISOString());
-    console.log("lastBarTime:", bars[bars.length - 1].time);
-    console.log(
-      "lastBarTime:",
-      new Date(bars[bars.length - 1].time).toISOString()
-    );
-
-    // Return the available data to TradingView
     if (bars.length === 0) {
       onHistoryCallback([], { noData: true });
     } else {
@@ -139,7 +116,7 @@ export const subscribeBars = (
   onResetCacheNeededCallback
 ) => {
   // console.log('[subscribeBars]: Method call with subscriberUID:', subscriberUID);
-  // Implement your subscription logic here
+  // Implement your subscription logic here 
 };
 
 export const unsubscribeBars = (subscriberUID) => {

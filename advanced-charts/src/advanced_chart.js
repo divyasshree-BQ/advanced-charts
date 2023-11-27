@@ -8,11 +8,11 @@ const TVChartContainer = () => {
 
   useEffect(() => {
     const widgetOptions = {
-      symbol: "PEPE",
+      symbol: "USDT",
       datafeed: Datafeed,
       container: chartContainerRef.current,
       library_path: "/charting_library/",
-      interval:"15",
+      interval:"5",
      
       locale: "en",
       disabled_features: [
