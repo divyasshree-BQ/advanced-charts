@@ -2,15 +2,15 @@ import axios from "axios";
 import * as Bitquery from "./components/callBitquery";
 const BITQUERY_API = "your key";
 
-function adjustExtremeValues(high, low, open, close, threshold) {
-  const maxAllowedHigh = Math.max(open, close) * threshold;
-  const minAllowedLow = Math.min(open, close) / threshold;
+// function adjustExtremeValues(high, low, open, close, threshold) {
+//   const maxAllowedHigh = Math.max(open, close) * threshold;
+//   const minAllowedLow = Math.min(open, close) / threshold;
 
-  return {
-    adjustedHigh: high > maxAllowedHigh ? maxAllowedHigh : high,
-    adjustedLow: low < minAllowedLow ? minAllowedLow : low,
-  };
-}
+//   return {
+//     adjustedHigh: high > maxAllowedHigh ? maxAllowedHigh : high,
+//     adjustedLow: low < minAllowedLow ? minAllowedLow : low,
+//   };
+// }
 
 export const getBars = async (
   symbolInfo,
@@ -62,21 +62,21 @@ export const getBars = async (
         let low = Number(data.Trade.low.toFixed(18));
         const resdate = new Date(data.Block.Time);
      
-        // Adjust extreme high/low values - there might be a better way but removing these allows the chart to render correctly
-        const { adjustedHigh, adjustedLow } = adjustExtremeValues(
-          high,
-          low,
-          open,
-          close,
-          1.005
-        ); // 1.5 is an example threshold
+        // // Adjust extreme high/low values - there might be a better way but removing these allows the chart to render correctly
+        // const { adjustedHigh, adjustedLow } = adjustExtremeValues(
+        //   high,
+        //   low,
+        //   open,
+        //   close,
+        //   1.005
+        // ); // 1.5 is an example threshold
 
         bars[i] = {
           // time: time.getTime(),
           time: resdate,
           open: open,
-          high: adjustedHigh,
-          low: adjustedLow,
+          high: high,
+          low: low,
           close: close,
           volume: data.Trade.volume,
         };
